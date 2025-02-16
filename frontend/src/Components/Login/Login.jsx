@@ -94,11 +94,12 @@ const Login = ({ setLoggedIn, setUserType, setUserDetails, server }) => {
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Create account?{" "}
-                  <a
-                    href="/signup"
-                    className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                    Sign-Up here
-                  </a>
+                  <button
+    onClick={() => navigate("/signup")}
+    className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+  >
+    Sign-Up here
+  </button>
                 </p>
               </form>
             </div>
