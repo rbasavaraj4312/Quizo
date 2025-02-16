@@ -102,8 +102,9 @@ If you encounter any errors, open the `package.json` file and install any missin
 After that, you will see a localhost URL where you can navigate to the application.
 
 ### Admin info : ( just for testing )
-email : **admin@gmail.com**
-password : **admin**
+Email : **admin@gmail.com**.
+
+Password : **admin**
 
 
 ## API Documentation
