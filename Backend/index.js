@@ -166,8 +166,13 @@ app.post("/create-quiz", async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
-   const formattedStartDate = new Date(new Date(startDate).getTime() + 5.5 * 60 * 60 * 1000).toISOString();
-const formattedEndDate = new Date(new Date(endDate).getTime() + 5.5 * 60 * 60 * 1000).toISOString();
+
+    function convertUtcToIst(utcDate) {
+      return new Date(new Date(utcDate).getTime() + 5.5 * 60 * 60 * 1000).toISOString();
+    }
+
+    const startTimeIST = convertUtcToIst(startDate);
+    const endTimeIST = convertUtcToIst(endDate);
 
 
 
@@ -177,8 +182,8 @@ const formattedEndDate = new Date(new Date(endDate).getTime() + 5.5 * 60 * 60 * 
       subject,
       marksPerQuestion,
       negativeMarking,
-      startDate:formattedStartDate,
-      endDate:formattedEndDate,
+      startDate:startTimeIST,
+      endDate:endTimeIST,
       questions,
       duration,
       unidirectional,
