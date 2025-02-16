@@ -1,9 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const port = 4000;
 const cors = require("cors");
 const bcrypt = require("bcrypt");
+
+// use dot env
+const dotenv = require("dotenv");
+dotenv.config();
+
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
@@ -13,9 +18,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect(
-    "mongodb+srv://rbasavaraj0312:Basavaraj1234@node.zy6xw.mongodb.net/?retryWrites=true&w=majority&appName=Node"
-  )
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Connected to database");
     app.listen(port, "0.0.0.0", () => {
