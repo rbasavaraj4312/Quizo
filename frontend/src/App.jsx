@@ -70,6 +70,7 @@ function App() {
             />
           }
         />
+        <Route path="*" element={<Home loggedIn={loggedIn} server={server} userType={userType} />}/>
         <Route
           path="/"
           element={
