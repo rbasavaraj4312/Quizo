@@ -213,20 +213,29 @@ app.post("/create-quiz", async (req, res) => {
 // All live quizes
 app.get("/live-quizzes", async (req, res) => {
   try {
-    const currentTime = new Date();
+    const currentTimeUTC = new Date();
+
     const liveQuizzes = await Quiz.find({
-      startDate: { $lte: currentTime },
-      endDate: { $gte: currentTime },
+      startDate: { $lte: currentTimeUTC },
+      endDate: { $gte: currentTimeUTC },
     })
-      .populate("createdBy", "userName") // Fetch only userName from QuizoUsers
+      .populate("createdBy", "userName")
       .exec();
 
-    res.status(200).json(liveQuizzes);
+    // Convert stored UTC dates to IST before sending response
+    const liveQuizzesIST = liveQuizzes.map((quiz) => ({
+      ...quiz._doc,
+      startDate: new Date(quiz.startDate.getTime() + 5.5 * 60 * 60 * 1000), // Convert to IST
+      endDate: new Date(quiz.endDate.getTime() + 5.5 * 60 * 60 * 1000),     // Convert to IST
+    }));
+
+    res.status(200).json(liveQuizzesIST);
   } catch (error) {
     console.error("Error fetching live quizzes:", error);
     res.status(500).json({ message: "Error fetching live quizzes" });
   }
 });
+
 
 app.post("/submit-quiz", async (req, res) => {
   let { quizId, studentId, name, answers, score } = req.body;
