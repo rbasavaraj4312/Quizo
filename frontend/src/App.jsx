@@ -28,7 +28,7 @@ function App() {
     JSON.parse(localStorage.getItem("userDetails")) || {}
   );
 
-  const [server, setServer] = useState("http://localhost:4000");
+  const [server, setServer] = useState("https://quizo-15ql.onrender.com");
 
   // Sync local storage when state changes
   useEffect(() => {
