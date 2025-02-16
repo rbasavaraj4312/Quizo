@@ -102,7 +102,11 @@ If you encounter any errors, open the `package.json` file and install any missin
 After that, you will see a localhost URL where you can navigate to the application.
 
 ### Admin info : ( just for testing )
-Email : **admin@gmail.com**.
+Change the user type to **admin** of any one user at database.
+
+In demo Admin info : 
+
+Email : **admin@gmail.com**
 
 Password : **admin**
 
