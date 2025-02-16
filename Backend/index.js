@@ -166,8 +166,9 @@ app.post("/create-quiz", async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
-    const formattedStartDate = new Date(startDate).toISOString();
-    const formattedEndDate = new Date(endDate).toISOString();
+   const formattedStartDate = new Date(new Date(startDate).getTime() + 5.5 * 60 * 60 * 1000).toISOString();
+const formattedEndDate = new Date(new Date(endDate).getTime() + 5.5 * 60 * 60 * 1000).toISOString();
+
 
 
     const newQuiz = new Quiz({
