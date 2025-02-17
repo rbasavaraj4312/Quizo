@@ -23,6 +23,17 @@ const Home = ({ loggedIn, userType, server }) => {
     fetchLiveQuizzes();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-50">
+        <div className="flex items-center gap-2 text-gray-600 text-lg font-medium">
+          <div className="animate-spin border-t-4 border-blue-500 border-solid rounded-full h-6 w-6"></div>
+          Loading Live quizzes...
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h2 className="text-2xl font-semibold text-center mb-6">Live Quizzes</h2>
