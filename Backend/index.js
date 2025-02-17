@@ -168,7 +168,7 @@ app.post("/create-quiz", async (req, res) => {
     }
 
     function convertUtcToIst(utcDate) {
-      return new Date(new Date(utcDate).getTime() + 5.5 * 60 * 60 * 1000).toISOString();
+      return new Date(new Date(utcDate).getTime() - 5.5 * 60 * 60 * 1000).toISOString();
     }
 
     const startTimeIST = convertUtcToIst(startDate);
@@ -182,8 +182,8 @@ app.post("/create-quiz", async (req, res) => {
       subject,
       marksPerQuestion,
       negativeMarking,
-      startDate:startTimeIST,
-      endDate:endTimeIST,
+      startDate,
+      endDate,
       questions,
       duration,
       unidirectional,
