@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Navbar from "./Components/Navbar/Navbar";
@@ -18,17 +18,10 @@ import Results from "./Components/MyQuiz/Results";
 import EditQuiz from "./Components/MyQuiz/EditQuiz";
 
 function App() {
-  const [userType, setUserType] = useState(
-    localStorage.getItem("userType") || ""
-  );
-  const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem("loggedIn") === "true"
-  );
-  const [userDetails, setUserDetails] = useState(
-    JSON.parse(localStorage.getItem("userDetails")) || {}
-  );
-
-  const [server, setServer] = useState("https://quizo-15ql.onrender.com");
+  const [userType, setUserType] = useState(localStorage.getItem("userType") || "");
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
+  const [userDetails, setUserDetails] = useState(JSON.parse(localStorage.getItem("userDetails")) || {});
+  const [server] = useState("https://quizo-15ql.onrender.com");
 
   // Sync local storage when state changes
   useEffect(() => {
@@ -48,7 +41,7 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <Navbar
         loggedIn={loggedIn}
         userType={userType}
@@ -59,99 +52,38 @@ function App() {
         server={server}
       />
       <Routes>
-        <Route
-          path="/login"
-          element={
-            <Login
-              server={server}
-              setLoggedIn={setLoggedIn}
-              setUserType={setUserType}
-              setUserDetails={setUserDetails}
-            />
-          }
-        />
-        <Route path="*" element={<Home loggedIn={loggedIn} server={server} userType={userType} />}/>
-        <Route
-          path="/"
-          element={
-            <Home loggedIn={loggedIn} server={server} userType={userType} />
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <SignUp
-              setLoggedIn={setLoggedIn}
-              setUserType={setUserType}
-              setUserDetails={setUserDetails}
-              server={server}
-            />
-          }
-        />
+        <Route path="/login" element={<Login server={server} setLoggedIn={setLoggedIn} setUserType={setUserType} setUserDetails={setUserDetails} />} />
+        <Route path="/signup" element={<SignUp setLoggedIn={setLoggedIn} setUserType={setUserType} setUserDetails={setUserDetails} server={server} />} />
+        <Route path="/" element={<Home loggedIn={loggedIn} server={server} userType={userType} />} />
 
-        {userType === "student" && (
+        {loggedIn && userType === "student" && (
           <>
-            <Route
-              path="/"
-              element={
-                <Home loggedIn={loggedIn} server={server} userType={userType} />
-              }
-            />
-            <Route
-              path="/take-quiz"
-              element={<Attempt userDetails={userDetails} server={server} />}
-            />
-            <Route
-              path="/attempted"
-              element={<Attempted userDetails={userDetails} server={server} />}
-            />
-            <Route
-              path="/quiz-review/:quizId"
-              element={<Review userDetails={userDetails} server={server} />}
-            />
+            <Route path="/take-quiz" element={<Attempt userDetails={userDetails} server={server} />} />
+            <Route path="/attempted" element={<Attempted userDetails={userDetails} server={server} />} />
+            <Route path="/quiz-review/:quizId" element={<Review userDetails={userDetails} server={server} />} />
           </>
         )}
-        {userType === "teacher" && (
+
+        {loggedIn && userType === "teacher" && (
           <>
-            <Route
-              path="/"
-              element={
-                <Home loggedIn={loggedIn} userType={userType} server={server} />
-              }
-            />
-            <Route
-              path="/add_quiz"
-              element={<AddQuiz userDetails={userDetails} server={server} />}
-            />
-            <Route
-              path="/myQuiz"
-              element={<MyQuiz userDetails={userDetails} server={server} />}
-            />
-            <Route
-              path="/check-results/:quizId"
-              element={<Results server={server} />}
-            />
-            <Route
-              path="/edit-quiz/:quizId"
-              element={<EditQuiz userDetails={userDetails} server={server} />}
-            />
+            <Route path="/add_quiz" element={<AddQuiz userDetails={userDetails} server={server} />} />
+            <Route path="/myQuiz" element={<MyQuiz userDetails={userDetails} server={server} />} />
+            <Route path="/check-results/:quizId" element={<Results server={server} />} />
+            <Route path="/edit-quiz/:quizId" element={<EditQuiz userDetails={userDetails} server={server} />} />
           </>
         )}
-        {userType === "admin" && (
+
+        {loggedIn && userType === "admin" && (
           <>
-            <Route
-              path="/add_teacher"
-              element={<AddTeacher server={server} />}
-            />
-            <Route
-              path="/all-teacher"
-              element={<AllTeacher server={server} />}
-            />
+            <Route path="/add_teacher" element={<AddTeacher server={server} />} />
+            <Route path="/all-teacher" element={<AllTeacher server={server} />} />
           </>
         )}
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
 
