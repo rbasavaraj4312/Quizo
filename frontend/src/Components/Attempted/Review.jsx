@@ -160,13 +160,6 @@ const Review = ({ userDetails, server }) => {
 
                           {/* ✅ Show Correct Answer (Always) */}
                           {isCorrectAnswer && (
-                            <span className="text-green-600 font-semibold ml-2">
-                              (Correct Answer)
-                            </span>
-                          )}
-
-                          {/* ✅ Show User's Selected Answer */}
-                          {isUserSelected && (
                             <>
                               {isUserCorrect ? (
                                 <XCircleIcon
@@ -179,6 +172,16 @@ const Review = ({ userDetails, server }) => {
                                   aria-label="Correct Answer"
                                 />
                               )}
+                              <span className="text-green-600 font-semibold ml-2">
+                                (Correct Answer)
+                              </span>
+                            </>
+                          )}
+
+                          {/* ✅ Show User's Selected Answer */}
+                          {isUserSelected && (
+                            <>
+                              
                               <span className="ml-2 text-sm text-gray-500 italic">
                                 (Your Answer)
                               </span>
