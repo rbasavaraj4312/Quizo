@@ -6,13 +6,7 @@ Quizo is a quiz management system designed to facilitate online quizzes between 
 
 ## Features :
 
-### 1. Admin role :
-
-- Admin can **add teacher** who can create/edit/delete quizzes.
-- Admin can view the **teacher list**.
-- Admin can **delete the teacher**.
-
-### 2. Teacher role :
+### 1. Teacher role :
 
 - Teacher can create, edit, and delete quizzes.
 - Teacher can create quizzes with features like:
@@ -25,7 +19,7 @@ Quizo is a quiz management system designed to facilitate online quizzes between 
   - Adding questions to the quiz with four options and **choosing the correct answer**.
   - When the quiz is live, the teacher can see **how many students attempted the quiz along with their results**.
 
-### 3. Student role :
+### 2. Student role :
 
 - Students can attend live quizzes.
 - After attending the quiz, students can **view their results**.
@@ -36,10 +30,6 @@ Quizo is a quiz management system designed to facilitate online quizzes between 
 
 ### Final Roles and Their Permissions :
 
-- **Admin role** permissions:
-  - Add teacher
-  - See the teacher list
-  - Delete teacher
 - **Teacher role** permissions:
   - Create quizzes
   - Edit quizzes
@@ -101,16 +91,6 @@ npm run dev
 If you encounter any errors, open the `package.json` file and install any missing dependencies.
 After that, you will see a localhost URL where you can navigate to the application.
 
-### Admin info : ( just for testing )
-Change the user type to **admin** of any one user at database.
-
-In demo Admin info : 
-
-Email : **admin@gmail.com**
-
-Password : **admin**
-
-
 ## API Documentation
 
 ### API Endpoints
@@ -124,10 +104,7 @@ Password : **admin**
 - `/add_quiz` : Add quiz page.
 - `/edit-quiz` : Edit quiz page.
 - `/check-results/:studentId` : Check results page.
-- `/add_teacher` : Add teacher page.
-- `/all-teacher` : Page listing all teachers, where the admin can view and delete teachers.
 
 ## Live Demo
 
 For a live demo, visit [here](https://quizo-rosy.vercel.app/).
-
