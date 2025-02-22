@@ -5,7 +5,7 @@ import axios from "axios";
 
 const SignUp = ({ setLoggedIn, setUserType, setUserDetails, server }) => {
   const [Details, setDetails] = useState({
-    userType: "student",
+    userType: "",
     userName: "",
     email: "",
     password: "",
@@ -22,7 +22,7 @@ const SignUp = ({ setLoggedIn, setUserType, setUserDetails, server }) => {
       });
 
       setDetails({
-        userType: "student",
+        userType: "",
         userName: "",
         email: "",
         password: "",
@@ -61,6 +61,40 @@ const SignUp = ({ setLoggedIn, setUserType, setUserDetails, server }) => {
                 Create an account
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                <div className="flex items-center mb-4">
+                  <input
+                    id="userTypeStudent"
+                    type="radio"
+                    name="userType"
+                    value="student"
+                    checked={Details.userType === "student"}
+                    onChange={handleChange}
+                    required
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label
+                    htmlFor="userTypeStudent"
+                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Student ( Attempt quiz )
+                  </label>
+                </div>
+                <div className="flex items-center mb-4">
+                  <input
+                    id="userTypeTeacher"
+                    type="radio"
+                    name="userType"
+                    value="teacher"
+                    checked={Details.userType === "teacher"}
+                    onChange={handleChange}
+                    required
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  <label
+                    htmlFor="userTypeTeacher"
+                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    Teacher ( Conduct quiz )
+                  </label>
+                </div>
                 <div>
                   <label
                     htmlFor="email"
