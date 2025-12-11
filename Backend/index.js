@@ -124,21 +124,21 @@ app.post("/create-quiz", async (req, res) => {
   } = req.body;
 
   // Validate required fields
-  if (
-    !createdBy ||
-    !title ||
-    !subject ||
-    !marksPerQuestion ||
-    !startDate ||
-    !endDate ||
-    !questions.length ||
-    !duration
-  ) {
-    return res.status(400).json({
-      message:
-        "All fields are required, including at least one question and duration.",
-    });
-  }
+  // if (
+  //   !createdBy ||
+  //   !title ||
+  //   !subject ||
+  //   !marksPerQuestion ||
+  //   !startDate ||
+  //   !endDate ||
+  //   !questions.length ||
+  //   !duration
+  // ) {
+  //   return res.status(400).json({
+  //     message:
+  //       "All fields are required, including at least one question and duration.",
+  //   });
+  // }
 
   // Validate date format
   if (
